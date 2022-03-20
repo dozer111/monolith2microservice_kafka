@@ -50,20 +50,20 @@ final class KafkaQueue extends Queue implements QueueContract
     public function pop($queue = null)
     {
         try {
+            $q = $queue ?? env('KAFKA_QUEUE');
             $consumer = $this->consumer;
-            $consumer->subscribe([$queue ?? env('KAFKA_QUEUE')]);
+            $consumer->subscribe([$q]);
             $message = $consumer->consume(5 * 1000);
-
             switch ($message->err) {
                 case RD_KAFKA_RESP_ERR_NO_ERROR:
                     $job = unserialize($message->payload);
                     $job->handle();
                     break;
                 case RD_KAFKA_RESP_ERR__PARTITION_EOF:
-                    echo "No messages. Waiting ...\n";
+                    echo "{$q}:No messages. Waiting ...\n";
                     break;
                 case RD_KAFKA_RESP_ERR__TIMED_OUT:
-                    echo "Timed out\n";
+                    echo "{$q}:Timed out\n";
                     break;
                 default:
                     throw new \Exception($message->errstr(), $message->err);
