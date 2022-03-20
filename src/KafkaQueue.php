@@ -60,10 +60,10 @@ final class KafkaQueue extends Queue implements QueueContract
                     $job->handle();
                     break;
                 case RD_KAFKA_RESP_ERR__PARTITION_EOF:
-                    echo "{$q}:No messages. Waiting ...\n";
+                    echo "{$q}: No messages. Waiting ...\n";
                     break;
                 case RD_KAFKA_RESP_ERR__TIMED_OUT:
-                    echo "{$q}:Timed out\n";
+                    echo "{$q}: Timed out\n";
                     break;
                 default:
                     throw new \Exception($message->errstr(), $message->err);
