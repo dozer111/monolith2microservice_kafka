@@ -1,5 +1,5 @@
 {
-    "name": "alex/kafka-broker-library",
+    "name": "dozer111/monolith2microservice_kafka",
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
