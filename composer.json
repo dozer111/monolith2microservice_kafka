@@ -1,5 +1,6 @@
 {
     "name": "alex/kafka-broker-library",
+    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
             "dozer111\\Kafka\\": "src/"
