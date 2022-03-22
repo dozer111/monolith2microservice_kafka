@@ -56,7 +56,7 @@ final class KafkaQueue extends Queue implements QueueContract
             $message = $consumer->consume(5 * 1000);
             switch ($message->err) {
                 case RD_KAFKA_RESP_ERR_NO_ERROR:
-                    var_dump("{$q}: 1 new message\n=============================================================\n");
+                    echo "{$q}: 1 new message\n=============================================================\n";
                     $job = unserialize($message->payload);
                     $job->handle();
                     break;
@@ -72,8 +72,10 @@ final class KafkaQueue extends Queue implements QueueContract
             }
         } catch (\Throwable $e) {
             var_dump([
+                'payload' => $message->payload,
                 'class' => get_class($e),
                 'msg' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
             ]);
         }
     }
