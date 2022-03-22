@@ -1,11 +1,6 @@
 {
     "name": "dozer111/monolith2microservice_kafka",
     "minimum-stability": "dev",
-    "autoload": {
-        "psr-4": {
-            "dozer111\\Kafka\\": "src/"
-        }
-    },
     "authors": [
         {
             "name": "dozer111",
